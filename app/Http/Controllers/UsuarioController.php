@@ -65,7 +65,6 @@ class UsuarioController extends Controller
         ]);
         if ($validator->fails())
         {
-
             Session::flash('message-inner', [
                 'msg'   => implode("\n", $validator->messages()->messages()["email"]),
                 'class' => 'alert-danger'
