@@ -17,12 +17,9 @@
 		<link href="{{asset('assets/demo/default/base/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Base Styles -->
 		<link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" />
-		<script src="{{asset('js/vue.js')}}"></script>
-		<script src="{{asset('js/vue-resource1.3.4.js')}}"></script>
 		<link rel="stylesheet" href="{{asset('js/jquery-confirm/css/jquery-confirm.css')}}" />
 		<link rel="stylesheet" href="{{asset('css/styles.css?version=2')}}" />
-		<script src="{{asset('js/vue.js')}}"></script>
-		<script src="{{asset('js/vue-resource1.3.4.js')}}"></script>
+		<script src="{{asset('js/scripts-globals/mascara-telefone.js')}}"></script>	
 		@stack('header')
 	</head>
 	<!-- end::Head -->

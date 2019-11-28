@@ -40,7 +40,7 @@
                                     Telefone
                                 </label>
 
-                                <input type="text" name="numero" id="numero" class="form-control {{ $errors->has('data_nascimento') ? 'has-error' : ''}}" 
+                                <input type="text" onkeyup='telGlobal("numero")' name="numero" id="numero" class="form-control {{ $errors->has('numero') ? 'has-error' : ''}}" maxlength="15" 
                                 />
                                 @if($errors->has('numero'))
                                 <span style='color: red;'>

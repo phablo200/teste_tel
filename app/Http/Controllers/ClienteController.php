@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Helper;
 use App\Http\Requests\ClienteIstRequest;
 use App\Http\Requests\ClienteUptRequest;
+use App\Http\Requests\TelefoneRequest;
 use Auth;
 use Session;
 use App\Models\Telefone;
@@ -131,7 +132,7 @@ class ClienteController extends Controller
     	return view('cliente.telefones', compact('cliente', 'telefones'));
     }
 
-    public function telefonesSalvar(Request $request, $id_cliente)
+    public function telefonesSalvar(TelefoneRequest $request, $id_cliente)
     {
     	$this->tel->create([
     		"id_cliente"=>$id_cliente,
