@@ -80,7 +80,7 @@ class UsuarioController extends Controller
             {
                 if ($request->senha==$request->confirmarSenha)
                 {
-                    $upt["senha"]=$request->senha;
+                    $upt["senha"]=Hash::make($request->senha);
                 } else
                 {
                     Session::flash('message-inner', [
