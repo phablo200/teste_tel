@@ -63,7 +63,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="m-login__container">
 						<div class="m-login__logo">
 							<a href="#">
-								<img src="{{asset('images/logo-cortada.png')}}" width="100px">
+								<img src="{{asset('images/logo.jpg')}}" width="200px">
 							</a>
 						</div>
 						<div class="m-login__signin">
