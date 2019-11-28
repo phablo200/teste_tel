@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
 class UsuarioUptRequest extends FormRequest
 {
     /**
@@ -21,7 +20,7 @@ class UsuarioUptRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules($id)
     {
         return [
             "email" => "required|unique:usuario",

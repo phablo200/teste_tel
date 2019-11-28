@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Http\Requests\UsuarioIstRequest;
 use App\Http\Requests\UsuarioUptRequest;
-use Hash, Auth, Session;
+use Hash, Auth, Session, Validator;
 
 
 class UsuarioController extends Controller
@@ -55,32 +55,45 @@ class UsuarioController extends Controller
         return view('usuario.atualizar', compact('usuario', 'id'));
     }
 
-    public function atualizar(UsuarioUptRequest $request, $id)
+    public function atualizar(Request $request, $id)
     {
-        $upt=[];
-        $upt["nome"]=$request->nome;
-        $upt["email"]=$request->email;
-        $error=false;
-        if ($request->senha && !$request->confirmarSenha || !$request->senha && $request->confirmarSenha)
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|unique:usuario,email,'.$id
+        ], [
+            'required' => 'O :attribute é necessario.',
+            'unique'=> 'O :attribute deve ser único'
+        ]);
+        if ($validator->fails())
         {
-            $error=true;
-        }
 
-        if ($request->senha && $request->confirmarSenha && $request->senha<>$request->confirmarSenha)
+            Session::flash('message-inner', [
+                'msg'   => implode("\n", $validator->messages()->messages()["email"]),
+                'class' => 'alert-danger'
+            ]);
+            return redirect()->route('usuario.editar', [$id]);
+        } else
         {
-            $error=true;
-        }
-
-        if ($request->senha && $request->confirmarSenha && $request->senha==$request->confirmarSenha)
-        {
-            $upt["senha"]=$request->senha;
-        }
-
-        if (!$error)
-        {
+            $upt=[];
+            $upt["nome"]=$request->nome;
+            $upt["email"]=$request->email;
+            $error=false;
+            if ($request->senha || $request->confirmarSenha)
+            {
+                if ($request->senha==$request->confirmarSenha)
+                {
+                    $upt["senha"]=$request->senha;
+                } else
+                {
+                    Session::flash('message-inner', [
+                        'msg'   => 'A confirmação de senha falhou',
+                        'class' => 'alert-danger'
+                    ]);
+                    return redirect()->route('usuario.editar', [$id]);
+                }
+            }
             $this->usr->find($id)->update($upt);
+            return redirect()->route('usuario.index');
         }
-        return redirect()->route('usuario.index');
     }
 
     public function excluir ($id)

@@ -16,7 +16,17 @@
               </div>
 
               <div class="m-portlet__body">
-
+                 @if(Session::has('message-inner'))
+                  <div class="col-md-12">
+                        <!-- Mensagem de retorno Sucesso ou Erro -->
+                        <div class="alert {{Session::get('message-inner')['class']}} alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{Session::get('message-inner')['msg']}}
+                        </div>
+                  </div>
+                  @endif
                  <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed"
                             method="POST" action="{{route('usuario.atualizar', [$id])}}" id="formNovaCobranca">
                         {{csrf_field()}}
