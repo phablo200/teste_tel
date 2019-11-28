@@ -32,5 +32,6 @@ CREATE TABLE `usuario` (
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
+INSERT INTO `usuario` (`id`,`nome`,`email`,`senha`,`remember_token`,`deleted_at`) VALUES (4,'admin','admin@admin.com','$2y$10$jsmxcuaUNHjcWvI.Q1XBeeuYQtUgVKf21hkPESktlZvHeCNJwIrsi',NULL,NULL);
 
 
