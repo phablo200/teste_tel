@@ -25,14 +25,14 @@ class ClienteController extends Controller
     	$this->cli= new Cliente();
     	$this->tel= new Telefone();
     }
-
+    
     public function index()
     {
     	$clientes=$this->cli
-    				->select("cliente.*", "usuario_cadastrou.nome as nome_cadastrou", "usuario_atualizou.nome as nome_atualizou")
-    				->leftJoin("usuario as usuario_cadastrou", "usuario_cadastrou.id", "=", "cliente.id_usuarios_cadastrou")
-    				->leftJoin("usuario as usuario_atualizou", "usuario_atualizou.id", "=", "cliente.id_usuarios_atualizou")
-    				->orderBy("cliente.id", "desc")->get();
+    				->select("client.*", "usuario_cadastrou.nome as nome_cadastrou", "usuario_atualizou.nome as nome_atualizou")
+    				->leftJoin("user as usuario_cadastrou", "usuario_cadastrou.id", "=", "client.id_usuarios_cadastrou")
+    				->leftJoin("user as usuario_atualizou", "usuario_atualizou.id", "=", "client.id_usuarios_atualizou")
+    				->orderBy("client.id", "desc")->get();
         return view('cliente.inicio', compact('clientes'));
     }
 
@@ -71,7 +71,6 @@ class ClienteController extends Controller
     	$ist["cpf"]=$req->cpf;
     	$ist["local_nascimento"]=$req->local_nascimento;
     	$ist["data_nascimento"]=$this->dataSql($req->data_nascimento);
-    	$ist["data_cadastro"]=date('Y-m-d H:i:s');
     	$ist["id_usuarios_cadastrou"]=Auth::user()->id;
     	$this->cli->create($ist);
     	return redirect()->route('cliente.index');
@@ -113,7 +112,6 @@ class ClienteController extends Controller
         $upt['cpf']=$request->cpf;
         $upt['local_nascimento']=$request->local_nascimento;
         $upt['data_nascimento']=$this->dataSql($request->data_nascimento);
-        $upt['data_atualizacao']=date('Y-m-d H:i:s');
         $upt['id_usuarios_atualizou']=Auth::user()->id;
         $this->cli->find($id)->update($upt);
         return redirect()->route('cliente.index');

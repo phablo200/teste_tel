@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes; //add this line
 class Usuario extends Authenticatable
 {
     use SoftDeletes;
-	protected $table="usuario";
+	protected $table="user";
     protected $fillable = [
         'nome', 'email', 'senha',
     ];
@@ -19,6 +19,4 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'senha'
     ];
-    const CREATED_AT = null;
-    const UPDATED_AT = null;
 }

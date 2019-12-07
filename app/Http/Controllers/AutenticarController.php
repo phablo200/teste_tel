@@ -25,7 +25,7 @@ class AutenticarController extends Controller
 	{
 		$logarUser =
            	$this->usr
-            	->where("usuario.email", $request->get('email'))
+            	->where("email", $request->get('email'))
     			->first();
         
 		if (!is_null($logarUser)) {

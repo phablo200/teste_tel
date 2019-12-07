@@ -9,15 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes; //add this line
 class Telefone extends Model
 {
     use SoftDeletes;     
-	protected $table="cliente_telefone";
+	protected $table="client_phone";
     protected $fillable = [
         'numero', 'id_cliente'
     ];
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    const CREATED_AT = null;
-    const UPDATED_AT = null;
 }
